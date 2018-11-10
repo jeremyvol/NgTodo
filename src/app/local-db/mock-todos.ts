@@ -1,6 +1,6 @@
-import { Todos, Status } from './todos';
+import { Todo, Status } from './todo';
 
-export const TODOS: Todos[] = [
+export const TODOS: Todo[] = [
     {
         id: 1,
         title: 'Payment for rent',
@@ -31,7 +31,7 @@ export const TODOS: Todos[] = [
     },
     {
         id: 5,
-        title: 'Housing taX',
+        title: 'Housing tax',
         status: Status.toDo,
         creationDate: new Date(2018, 10, 14),
         dueDate: new Date(2018, 11, 26)

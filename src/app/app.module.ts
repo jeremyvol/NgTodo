@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+// import { CommonModule } from '@angular/common';
+// import { FormsModule } from '@angular/forms';
+// import { HttpModule } from '@angular/http';
+// import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+
+import { TodosModule } from './todos/todos.module';
 
 // Material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
+// import { MatMenuModule } from '@angular/material/menu';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -21,6 +24,7 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,14 +32,17 @@ import { InMemoryDataService } from './in-memory-data.service';
   ],
   imports: [
     BrowserModule,
-    CommonModule,
-    FormsModule,
-    HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    // HttpClientModule,
+    TodosModule,
     AppRoutingModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    // CommonModule,
+    // FormsModule,
+    // HttpModule,
+    // AppRoutingModule,
     MatToolbarModule,
     MatIconModule,
-    MatMenuModule,
+    // MatMenuModule,
     BrowserAnimationsModule
   ],
   providers: [],

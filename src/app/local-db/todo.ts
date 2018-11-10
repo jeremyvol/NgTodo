@@ -1,4 +1,4 @@
-export class Todos {
+export class Todo {
     id: number;
     title: string;
     status: Status;
