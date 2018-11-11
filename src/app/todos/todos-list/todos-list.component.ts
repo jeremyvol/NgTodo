@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Todo } from '../../local-db/todo';
+import { Todo, Status } from '../../local-db/todo';
 import { TodosService } from '../todos.service';
 
 import { SelectionModel } from '@angular/cdk/collections';
@@ -22,6 +22,7 @@ export class TodosListComponent implements OnInit {
   ];
   dataSource;
   selection = new SelectionModel<Todo>(true, []);
+  selectedRowIndex = -1;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -31,20 +32,20 @@ export class TodosListComponent implements OnInit {
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.todosService.getAll());
     this.dataSource.sort = this.sort;
-    // this.dataSource.sort('status');
     this.dataSource.paginator = this.paginator;
   }
 
-  onCheckboxChange(element) {
-    if (
-      confirm(
-        'Are you sure you want to change the status of ' +
-          element.title +
-          '? It will no longer be editable.'
-      )
-    ) {
-      element.status = 'Done';
+  onCheckboxChange(e: any, element: Todo) {
+    if (element.status !== Status.done) {
+      element.status = Status.done;
+      this.dataSource.sort = this.sort;
+    } else {
+      element.status = Status.toDo;
       this.dataSource.sort = this.sort;
     }
+  }
+
+  highlight(row) {
+    this.selectedRowIndex = row.id;
   }
 }
