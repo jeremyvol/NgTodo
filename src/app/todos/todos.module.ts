@@ -6,6 +6,8 @@ import { TodoRoutingModule } from './todo-routing.module';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { TodosListComponent } from './todos-list/todos-list.component';
 import { TodosService } from './todos.service';
@@ -17,8 +19,10 @@ import { TodosService } from './todos.service';
     FormsModule,
     TodoRoutingModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatPaginatorModule,
+    MatCheckboxModule
   ],
   providers: [TodosService]
 })
-export class TodosModule { }
+export class TodosModule {}

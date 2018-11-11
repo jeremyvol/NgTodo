@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { Todo } from '../../local-db/todo';
 import { TodosService } from '../todos.service';
 
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-todos-list',
@@ -12,23 +13,38 @@ import { MatSort, MatTableDataSource } from '@angular/material';
   styleUrls: ['./todos-list.component.sass']
 })
 export class TodosListComponent implements OnInit {
-
-  displayedColumns: string[] = ['title', 'status', 'creationDate', 'dueDate'];
+  displayedColumns: string[] = [
+    'select',
+    'title',
+    'status',
+    'creationDate',
+    'dueDate'
+  ];
   dataSource;
+  selection = new SelectionModel<Todo>(true, []);
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  // todos: Todo[] = null;
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  constructor(
-    private router: Router,
-    private todosService: TodosService
-  ) { }
+  constructor(private router: Router, private todosService: TodosService) {}
 
   ngOnInit() {
-    // const data = ;
     this.dataSource = new MatTableDataSource(this.todosService.getAll());
     this.dataSource.sort = this.sort;
+    // this.dataSource.sort('status');
+    this.dataSource.paginator = this.paginator;
+  }
+
+  onCheckboxChange(element) {
+    if (
+      confirm(
+        'Are you sure you want to change the status of ' +
+          element.title +
+          '? It will no longer be editable.'
+      )
+    ) {
+      element.status = 'Done';
+      this.dataSource.sort = this.sort;
+    }
   }
 }
