@@ -1,0 +1,26 @@
+<mat-card *ngIf="todo" [ngClass]="'card center-me'">
+  <form>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Title" [(ngModel)]="todo.title" name="title">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <textarea matInput placeholder="Description" [(ngModel)]="todo.description" name="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="todo.dueDate" name="dueDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </form>
+
+  <mat-card-actions>
+    <div class="flex-container-nowrap justify-content-between">
+      <button mat-flat-button color="warn" (click)="goBack()">Cancel</button>
+      <button mat-flat-button color="primary" (click)="save(todo)">Save</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
+<h4 *ngIf="!todo" class="center">No Todo to edit !</h4>
