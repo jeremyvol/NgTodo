@@ -1,0 +1,27 @@
+<mat-card *ngIf="todo" [ngClass]="'card center-me'">
+  <mat-card-title>{{ todo.title }}</mat-card-title>
+  <mat-card-subtitle>{{ todo.description }}</mat-card-subtitle>
+  <mat-card-content>
+    <table>
+      <tbody>
+        <tr>
+          <td>Creation Date</td>
+          <td>{{ todo.creationDate | date: 'dd/MM/yyyy' }}</td>
+        </tr>
+        <tr>
+          <td>Due Date</td>
+          <td>{{ todo.dueDate | date: 'dd/MM/yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <div class="flex-container-nowrap justify-content-between">
+      <button mat-flat-button color="primary" (click)="goBack()">Back to List</button>
+      <button mat-flat-button color="primary" (click)="goEdit(todo)">Edit</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
+
+<h4 *ngIf="!todo" class="center">No Todo to display !</h4>

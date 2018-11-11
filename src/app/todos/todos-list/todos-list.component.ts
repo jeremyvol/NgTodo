@@ -18,7 +18,9 @@ export class TodosListComponent implements OnInit {
     'title',
     'status',
     'creationDate',
-    'dueDate'
+    'dueDate',
+    'read',
+    'edit',
   ];
   dataSource;
   selection = new SelectionModel<Todo>(true, []);

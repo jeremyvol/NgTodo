@@ -1,6 +1,7 @@
 export class Todo {
   id: number;
   title: string;
+  description: string;
   status: Status;
   creationDate: Date;
   dueDate: Date;
