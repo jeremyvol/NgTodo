@@ -6,7 +6,7 @@ export const TODOS: Todo[] = [
     title: 'Payment for rent',
     description: 'Love all, trust a few, do wrong to none.',
     status: Status.done,
-    creationDate: new Date(2018, 11, 10),
+    creationDate: new Date(2018, 10, 1),
     dueDate: new Date(2018, 11, 30)
   },
   {
@@ -15,7 +15,7 @@ export const TODOS: Todo[] = [
     description:
       'Fair is foul, and foul is fair: Hover through the fog and filthy air.',
     status: Status.toDo,
-    creationDate: new Date(2018, 11, 7),
+    creationDate: new Date(2018, 10, 7),
     dueDate: new Date(2018, 12, 31)
   },
   {
@@ -42,7 +42,7 @@ export const TODOS: Todo[] = [
     description:
       'Once in a while as human being we have to contribute to the national effort. As so, pay taxes.',
     status: Status.toDo,
-    creationDate: new Date(2018, 10, 14),
+    creationDate: new Date(2018, 9, 14),
     dueDate: new Date(2018, 11, 26)
   }
 ];
