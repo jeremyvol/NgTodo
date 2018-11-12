@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo } from 'src/app/local-db/todo';
+import { Todo, Status } from 'src/app/local-db/todo';
 import { TodosService } from '../todos.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-edit',
@@ -9,15 +9,38 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./todo-edit.component.sass']
 })
 export class TodoEditComponent implements OnInit {
-  todo: Todo = null;
+  todo: Todo = {
+    id: 0,
+    title: '',
+    description: '',
+    status: Status.toDo,
+    creationDate: new Date(),
+    dueDate: new Date()
+  };
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private todosService: TodosService
   ) {}
 
   ngOnInit() {
-    const id = +this.route.snapshot.params['id'];
-    this.todo = this.todosService.getOne(id);
+    if (this.route.snapshot.params['id']) {
+      const id = +this.route.snapshot.params['id'];
+      this.todo = this.todosService.getOne(id);
+    }
+  }
+
+  goBack() {
+    this.router.navigate(['/todos']);
+  }
+
+  save(todo: Todo) {
+    if (todo.id) {
+      this.todosService.update(todo);
+    } else {
+      this.todosService.insert(todo);
+    }
+    this.router.navigate(['/todos']);
   }
 }

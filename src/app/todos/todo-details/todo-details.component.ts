@@ -20,15 +20,15 @@ export class TodoDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
       const id = +params['id'];
-      this.todo = this.todosService.getOne(id); // on utilise le service pour récupérer un pokémon en fonction de son identifiant.
+      this.todo = this.todosService.getOne(id);
     });
   }
 
-  goBack(): void {
+  goBack() {
     this.router.navigate(['/todos']);
   }
 
-  goEdit(todo: Todo): void {
+  goEdit(todo: Todo) {
     const link = ['/todo/edit', todo.id];
     this.router.navigate(link);
   }

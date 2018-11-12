@@ -8,6 +8,7 @@ import { TodoEditComponent } from './todo-edit/todo-edit.component';
 // routes definition
 const todosRoutes: Routes = [
   { path: 'todos', component: TodosListComponent },
+  { path: 'todo/new', component: TodoEditComponent },
   { path: 'todo/:id', component: TodoDetailsComponent },
   { path: 'todo/edit/:id', component: TodoEditComponent }
 ];

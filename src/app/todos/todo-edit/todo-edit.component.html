@@ -1,4 +1,4 @@
-<mat-card *ngIf="todo" [ngClass]="'card center-me'">
+<mat-card [ngClass]="'card center-me'">
   <form>
     <mat-form-field class="full-width">
       <input matInput placeholder="Title" [(ngModel)]="todo.title" name="title">
@@ -23,4 +23,3 @@
     </div>
   </mat-card-actions>
 </mat-card>
-<h4 *ngIf="!todo" class="center">No Todo to edit !</h4>
