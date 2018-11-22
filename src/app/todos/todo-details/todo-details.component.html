@@ -18,8 +18,8 @@
 
   <mat-card-actions>
     <div class="flex-container-nowrap justify-content-between">
-      <button mat-flat-button color="primary" (click)="goBack()">Back to List</button>
-      <button mat-flat-button color="primary" (click)="goEdit(todo)">Edit</button>
+      <a mat-flat-button color="primary" routerLink="/todos">Back to List</a>
+      <a mat-flat-button color="primary" routerLink="/todo/new">Edit</a>
     </div>
   </mat-card-actions>
 </mat-card>

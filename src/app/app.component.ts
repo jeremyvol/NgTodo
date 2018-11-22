@@ -10,8 +10,4 @@ export class AppComponent {
   title = 'ngTodo';
 
   constructor(private router: Router) {}
-
-  goTo(route: string) {
-    this.router.navigate([route]);
-  }
 }

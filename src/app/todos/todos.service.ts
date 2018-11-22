@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { TODOS } from '../local-db/mock-todos';
-import { Todo, Status } from '../local-db/todo';
+import { TODOS } from '../shared/mock-todos';
+import { Todo, Status } from '../shared/todo';
 
 @Injectable({
   providedIn: 'root'

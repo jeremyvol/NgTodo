@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo, Status } from 'src/app/local-db/todo';
+import { Todo, Status } from 'src/app/shared/todo';
 import { TodosService } from '../todos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -29,10 +29,6 @@ export class TodoEditComponent implements OnInit {
       const id = +this.route.snapshot.params['id'];
       this.todo = this.todosService.getOne(id);
     }
-  }
-
-  goBack() {
-    this.router.navigate(['/todos']);
   }
 
   save(todo: Todo) {

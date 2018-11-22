@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Todo, Status } from '../../local-db/todo';
+import { Todo, Status } from '../../shared/todo';
 import { TodosService } from '../todos.service';
 
 import { SelectionModel } from '@angular/cdk/collections';
@@ -20,7 +20,7 @@ export class TodosListComponent implements OnInit {
     'creationDate',
     'dueDate',
     'read',
-    'edit',
+    'edit'
   ];
   dataSource;
   selection = new SelectionModel<Todo>(true, []);
@@ -29,7 +29,7 @@ export class TodosListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private router: Router, private todosService: TodosService) {}
+  constructor(private todosService: TodosService) {}
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.todosService.getAll());

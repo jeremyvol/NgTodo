@@ -1,7 +1,11 @@
 <mat-toolbar color="primary" [ngClass]="'margin-bottom-2rem'">
   <mat-toolbar-row>
-    <mat-icon class="icon pointer" (click)="goTo('todos')" title="Navigate to list">list</mat-icon>
-    <mat-icon class="icon pointer" (click)="goTo('/todo/new')" title="Add a new Todo">note_add</mat-icon>
+    <a mat-icon-button routerLink="/todos">
+      <mat-icon title="Navigate to list" class="icon white">list</mat-icon>
+    </a>
+    <a mat-icon-button routerLink="/todo/new">
+      <mat-icon title="Add a new Todo" class="icon white">note_add</mat-icon>
+    </a>
     <span class="spacer"></span>
     <span>NgTodo</span>
   </mat-toolbar-row>

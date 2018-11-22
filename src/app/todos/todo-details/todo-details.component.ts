@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodosService } from '../todos.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Todo } from '../../local-db/todo';
+import { Todo } from '../../shared/todo';
 
 @Component({
   selector: 'app-todo-details',
@@ -18,18 +18,9 @@ export class TodoDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.forEach((params: Params) => {
+    this.route.params.subscribe(params => {
       const id = +params['id'];
       this.todo = this.todosService.getOne(id);
     });
-  }
-
-  goBack() {
-    this.router.navigate(['/todos']);
-  }
-
-  goEdit(todo: Todo) {
-    const link = ['/todo/edit', todo.id];
-    this.router.navigate(link);
   }
 }
