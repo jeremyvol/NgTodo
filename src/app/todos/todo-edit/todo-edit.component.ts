@@ -27,16 +27,19 @@ export class TodoEditComponent implements OnInit {
   ngOnInit() {
     if (this.route.snapshot.params['id']) {
       const id = +this.route.snapshot.params['id'];
-      this.todo = this.todosService.getOne(id);
+      this.todosService.getOne(id).subscribe(data => {
+        this.todo = data as Todo;
+      });
     }
   }
 
   save(todo: Todo) {
-    if (todo.id) {
+    // WIP
+    /*if (todo.id) {
       this.todosService.update(todo);
     } else {
       this.todosService.insert(todo);
     }
-    this.router.navigate(['/todos']);
+    this.router.navigate(['/todos']);*/
   }
 }

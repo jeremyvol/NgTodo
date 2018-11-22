@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { Todo, Status } from '../../shared/todo';
 import { TodosService } from '../todos.service';
@@ -22,6 +23,7 @@ export class TodosListComponent implements OnInit {
     'read',
     'edit'
   ];
+  todos: Todo[] = [];
   dataSource;
   selection = new SelectionModel<Todo>(true, []);
   selectedRowIndex = -1;
@@ -32,9 +34,13 @@ export class TodosListComponent implements OnInit {
   constructor(private todosService: TodosService) {}
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.todosService.getAll());
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.todosService.getAll().subscribe(data => {
+      this.todos = data as Todo[];
+      console.log(this.todos);
+      this.dataSource = new MatTableDataSource(this.todos);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   onCheckboxChange(e: any, element: Todo) {

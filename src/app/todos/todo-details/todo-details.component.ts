@@ -20,7 +20,9 @@ export class TodoDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = +params['id'];
-      this.todo = this.todosService.getOne(id);
+      this.todosService.getOne(id).subscribe(data => {
+        this.todo = data as Todo;
+      });
     });
   }
 }
