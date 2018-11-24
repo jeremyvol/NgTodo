@@ -1,25 +1,50 @@
 <mat-card [ngClass]="'card center-me'">
-  <form>
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="full-width">
-      <input matInput placeholder="Title" [(ngModel)]="todo.title" name="title">
+      <input
+        matInput
+        placeholder="Title"
+        name="title"
+        formControlName="title"
+      />
+      <!-- [(ngModel)]="todo.title" -->
     </mat-form-field>
 
     <mat-form-field class="full-width">
-      <textarea matInput placeholder="Description" [(ngModel)]="todo.description" name="description"></textarea>
+      <textarea
+        matInput
+        placeholder="Description"
+        name="description"
+        formControlName="description"
+      ></textarea>
+      <!-- [(ngModel)]="todo.description" -->
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="todo.dueDate" name="dueDate">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Choose a date"
+        name="dueDate"
+        formControlName="dueDate"
+      />
+      <!-- [(ngModel)]="todo.dueDate" -->
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-
   </form>
 
   <mat-card-actions>
     <div class="flex-container-nowrap justify-content-between">
       <a mat-flat-button color="warn" routerLink="/todos">Cancel</a>
-      <button mat-flat-button color="primary" (click)="save(todo)">Save</button>
+      <button
+        mat-flat-button
+        type="submit"
+        color="primary"
+        [disabled]="!todoForm.valid"
+      >
+        Save
+      </button>
     </div>
   </mat-card-actions>
 </mat-card>

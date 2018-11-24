@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Todo, Status } from 'src/app/shared/todo';
 import { TodosService } from '../todos.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-edit',
@@ -18,6 +19,12 @@ export class TodoEditComponent implements OnInit {
     dueDate: new Date()
   };
 
+  todoForm = new FormGroup({
+    title: new FormControl(this.todo.title, [Validators.required]),
+    description: new FormControl(this.todo.description),
+    dueDate: new FormControl(this.todo.dueDate)
+  });
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -31,6 +38,11 @@ export class TodoEditComponent implements OnInit {
         this.todo = data as Todo;
       });
     }
+  }
+
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.todoForm.value);
   }
 
   save(todo: Todo) {
