@@ -36,7 +36,6 @@ export class TodosListComponent implements OnInit {
   ngOnInit() {
     this.todosService.getAll().subscribe(data => {
       this.todos = data as Todo[];
-      console.log(this.todos);
       this.dataSource = new MatTableDataSource(this.todos);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
