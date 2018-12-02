@@ -2,14 +2,8 @@ import { Action } from '@ngrx/store';
 import { Todo } from '../../shared/todo';
 
 export enum ActionTypes {
-  INIT_TODOS = '[TODO] Init',
   ADD_TODO = '[TODO] Add',
-  UPDATE_TODO = '[TODO] Update',
-  GET_TODO = '[TODO] Get'
-}
-
-export class GetInitialTodoState implements Action {
-  readonly type = ActionTypes.INIT_TODOS;
+  UPDATE_TODO = '[TODO] Update'
 }
 
 export class AddTodo implements Action {
