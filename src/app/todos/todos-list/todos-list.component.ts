@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { SelectionModel } from '@angular/cdk/collections';
 
 import { Todo, Status } from '../../shared/todo';
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-todos-list',
@@ -42,7 +42,8 @@ export class TodosListComponent implements OnInit {
     });
   }
 
-  onCheckboxChange(e: any, element: Todo) {
+  onCheckboxChange(element: Todo) {
+    // TODO create new action and reducer for Todo Status change
     if (element.status !== Status.done) {
       element.status = Status.done;
       this.dataSource.sort = this.sort;

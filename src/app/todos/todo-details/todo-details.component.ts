@@ -19,12 +19,12 @@ export class TodoDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const id = +params['id'];
-      this.todosState = this.store.select('todoList');
-      this.todosState.subscribe(data => {
-        const todos = data.todos as Todo[];
-        this.todo = todos[id];
+    const id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+    this.todosState = this.store.select('todoList');
+    this.todosState.subscribe(data => {
+      const todos = data.todos as Todo[];
+      this.todo = todos.find(el => {
+        return el.id === id;
       });
     });
   }

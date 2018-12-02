@@ -7,7 +7,7 @@ export class Todo {
   dueDate: Date = new Date();
 }
 
-export enum Status {
+export enum Status { // this enum allows to have more status in the future
   toDo = 'To do',
   done = 'Done'
 }

@@ -38,8 +38,10 @@ export class TodoEditComponent implements OnInit {
       creationDate: new FormControl(new Date()),
       dueDate: new FormControl(new Date())
     });
-    if (this.route.snapshot.params['id']) {
-      const id = +this.route.snapshot.params['id'];
+
+    const id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+
+    if (id) {
       this.todosState = this.store.select('todoList');
       this.todosState.subscribe(data => {
         const todos = data.todos as Todo[];
