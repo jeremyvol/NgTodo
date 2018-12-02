@@ -7,7 +7,9 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Todo, Status } from 'src/app/shared/todo';
-import { TodosService } from '../todos.service';
+import { Store } from '@ngrx/store';
+import * as TodoActions from '../store/todo.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todo-edit',
@@ -17,12 +19,13 @@ import { TodosService } from '../todos.service';
 export class TodoEditComponent implements OnInit {
   todo: Todo;
   todoForm: FormGroup;
+  todosState: Observable<{ todos: Todo[] }>;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private todosService: TodosService
+    private store: Store<{ todoList: { todos: Todo[] } }>
   ) {}
 
   ngOnInit() {
@@ -35,11 +38,12 @@ export class TodoEditComponent implements OnInit {
       creationDate: new FormControl(new Date()),
       dueDate: new FormControl(new Date())
     });
-
     if (this.route.snapshot.params['id']) {
       const id = +this.route.snapshot.params['id'];
-      this.todosService.getOne(id).subscribe(data => {
-        this.todo = data as Todo;
+      this.todosState = this.store.select('todoList');
+      this.todosState.subscribe(data => {
+        const todos = data.todos as Todo[];
+        this.todo = todos[id - 1];
         this.todoForm = this.formBuilder.group(this.todo);
         // this.todoForm.setValue(this.todo); both solution works but what should be the best practice ?
       });
@@ -48,14 +52,16 @@ export class TodoEditComponent implements OnInit {
 
   onSubmit() {
     if (this.todo.id) {
-      this.todosService
-        .update(this.todoForm.value)
-        .subscribe(() => this.goBack());
+      this.store.dispatch(
+        new TodoActions.UpdateTodo({
+          id: this.todo.id,
+          todo: this.todoForm.value
+        })
+      );
     } else {
-      this.todosService
-        .insert(this.todoForm.value)
-        .subscribe(() => this.goBack());
+      this.store.dispatch(new TodoActions.AddTodo(this.todoForm.value));
     }
+    this.goBack();
   }
 
   goBack() {

@@ -1,7 +1,6 @@
 // Angular Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Material Angular Modules
@@ -27,7 +26,6 @@ import { TodoEditComponent } from './todo-edit/todo-edit.component';
   declarations: [TodosListComponent, TodoDetailsComponent, TodoEditComponent],
   imports: [
     CommonModule,
-    // FormsModule,
     ReactiveFormsModule,
     MatTableModule,
     MatSortModule,

@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Todo, Status } from '../../shared/todo';
-import { TodosService } from '../todos.service';
-
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-todos-list',
@@ -23,7 +21,8 @@ export class TodosListComponent implements OnInit {
     'read',
     'edit'
   ];
-  todos: Todo[] = [];
+  todosState: Observable<{ todos: Todo[] }>;
+  todos: Todo[];
   dataSource;
   selection = new SelectionModel<Todo>(true, []);
   selectedRowIndex = -1;
@@ -31,11 +30,12 @@ export class TodosListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private todosService: TodosService) {}
+  constructor(private store: Store<{ todoList: { todos: Todo[] } }>) {}
 
   ngOnInit() {
-    this.todosService.getAll().subscribe(data => {
-      this.todos = data as Todo[];
+    this.todosState = this.store.select('todoList'); // initialState loaded
+    this.todosState.subscribe(data => {
+      this.todos = data.todos as Todo[];
       this.dataSource = new MatTableDataSource(this.todos);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;

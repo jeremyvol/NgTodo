@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TodosService } from '../todos.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Todo } from '../../shared/todo';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-todo-details',
@@ -10,18 +11,20 @@ import { Todo } from '../../shared/todo';
 })
 export class TodoDetailsComponent implements OnInit {
   todo: Todo = null;
+  todosState: Observable<{ todos: Todo[] }>;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private todosService: TodosService
+    private store: Store<{ todoList: { todos: Todo[] } }>
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = +params['id'];
-      this.todosService.getOne(id).subscribe(data => {
-        this.todo = data as Todo;
+      this.todosState = this.store.select('todoList');
+      this.todosState.subscribe(data => {
+        const todos = data.todos as Todo[];
+        this.todo = todos[id];
       });
     });
   }

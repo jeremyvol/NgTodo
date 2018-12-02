@@ -1,8 +1,9 @@
+// Deprecated service since data management is done through Ngrx Store
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-// import { TODOS } from '../shared/mock-todos';
 import { Todo, Status } from '../shared/todo';
 
 const httpOptions = {
