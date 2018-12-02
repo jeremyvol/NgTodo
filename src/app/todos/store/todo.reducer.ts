@@ -69,10 +69,13 @@ export function todoReducer(
       };
 
     case TodoActions.ActionTypes.UPDATE_TODO:
-      const todo = state.todos[action.payload.id - 1];
+      const todo = state.todos.find(el => {
+        return el.id === action.payload.id;
+      });
+      const index = state.todos.indexOf(todo);
       const updatedTodo = { ...todo, ...action.payload.todo };
       const todos = [...state.todos];
-      todos[action.payload.id - 1] = updatedTodo;
+      todos[index] = updatedTodo;
       return {
         ...state,
         todos: todos

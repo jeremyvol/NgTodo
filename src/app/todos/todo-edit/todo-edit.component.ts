@@ -43,7 +43,9 @@ export class TodoEditComponent implements OnInit {
       this.todosState = this.store.select('todoList');
       this.todosState.subscribe(data => {
         const todos = data.todos as Todo[];
-        this.todo = todos[id - 1];
+        this.todo = todos.find(el => {
+          return el.id === id;
+        });
         this.todoForm = this.formBuilder.group(this.todo);
         // this.todoForm.setValue(this.todo); both solution works but what should be the best practice ?
       });
