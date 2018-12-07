@@ -2,8 +2,14 @@ import { Action } from '@ngrx/store';
 import { Todo } from '../../shared/todo';
 
 export enum ActionTypes {
+  INIT_STATE = '[TODO] Init',
   ADD_TODO = '[TODO] Add',
   UPDATE_TODO = '[TODO] Update'
+}
+
+export class InitTodos implements Action {
+  readonly type = ActionTypes.INIT_STATE;
+  constructor() {}
 }
 
 export class AddTodo implements Action {
@@ -16,4 +22,4 @@ export class UpdateTodo implements Action {
   constructor(public payload: { id: number; todo: Todo }) {}
 }
 
-export type TodoActions = AddTodo | UpdateTodo;
+export type TodoActions = InitTodos | AddTodo | UpdateTodo;

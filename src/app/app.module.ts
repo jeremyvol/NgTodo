@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { StoreModule } from '@ngrx/store';
+// import { EffectsModule } from '@ngrx/effects';
 
 // Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -35,6 +36,7 @@ import { todoReducer } from './todos/store/todo.reducer';
     MatIconModule,
     TodosModule,
     AppRoutingModule
+    // EffectsModule.forRoot([TodoEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

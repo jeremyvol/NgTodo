@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Todo, Status } from '../shared/todo';
+import { Todo } from '../shared/todo';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,7 +28,7 @@ export class TodosService {
     const url = `${this.todosUrl}/${id}`;
     return this.http
       .get<Todo>(url)
-      .pipe(catchError(this.handleError<Todo>(`getHero id=${id}`)));
+      .pipe(catchError(this.handleError<Todo>(`getOne id=${id}`)));
   }
 
   update(todo: Todo): Observable<any> {

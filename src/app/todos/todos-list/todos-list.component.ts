@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { SelectionModel } from '@angular/cdk/collections';
 
 import { Todo, Status } from '../../shared/todo';
+import * as fromTodos from '../store/todo.reducer';
 
 @Component({
   selector: 'app-todos-list',
@@ -30,7 +31,7 @@ export class TodosListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private store: Store<{ todoList: { todos: Todo[] } }>) {}
+  constructor(private store: Store<fromTodos.AppState>) {}
 
   ngOnInit() {
     this.todosState = this.store.select('todoList'); // initialState loaded

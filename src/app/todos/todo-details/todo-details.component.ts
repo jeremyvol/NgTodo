@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Todo } from '../../shared/todo';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { Todo } from '../../shared/todo';
+import * as fromTodos from '../store/todo.reducer';
 
 @Component({
   selector: 'app-todo-details',
@@ -15,7 +17,7 @@ export class TodoDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<{ todoList: { todos: Todo[] } }>
+    private store: Store<fromTodos.AppState>
   ) {}
 
   ngOnInit() {

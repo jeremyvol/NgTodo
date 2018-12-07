@@ -6,10 +6,12 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Todo, Status } from 'src/app/shared/todo';
 import { Store } from '@ngrx/store';
-import * as TodoActions from '../store/todo.actions';
 import { Observable } from 'rxjs';
+
+import { Todo, Status } from '../../shared/todo';
+import * as TodoActions from '../store/todo.actions';
+import * as fromTodos from '../store/todo.reducer';
 
 @Component({
   selector: 'app-todo-edit',
@@ -25,7 +27,7 @@ export class TodoEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<{ todoList: { todos: Todo[] } }>
+    private store: Store<fromTodos.AppState>
   ) {}
 
   ngOnInit() {
