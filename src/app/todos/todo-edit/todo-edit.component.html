@@ -1,7 +1,8 @@
 <mat-card [ngClass]="'card center-me'">
   <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="full-width">
-      <input matInput placeholder="Title" name="title" formControlName="title" />
+      <input matInput placeholder="Title" name="title" formControlName="title" required />
+      <mat-error>This field should not be empty.</mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width">
