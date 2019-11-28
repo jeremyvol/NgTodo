@@ -28,8 +28,8 @@ export class TodosListComponent implements OnInit {
   selection = new SelectionModel<Todo>(true, []);
   selectedRowIndex = -1;
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(private store: Store<fromTodos.AppState>) {}
 
