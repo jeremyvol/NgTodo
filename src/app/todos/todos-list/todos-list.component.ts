@@ -6,6 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { MatSort } from '@angular/material/sort';
 
 import { Todo, Status } from '../../shared/todo.interface';
+import * as TodoActions from '../store/todo.actions';
 import * as fromRoot from '../../app.reducer';
 
 @Component({
@@ -41,11 +42,26 @@ export class TodosListComponent implements OnInit {
   }
 
   onCheckboxChange(element: Todo) {
-    // TODO create new action and reducer for Todo Status change
     if (element.status !== Status.done) {
-      element.status = Status.done;
+      this.store.dispatch(
+        new TodoActions.UpdateTodo({
+          id: element.id,
+          todo: {
+            ...element,
+            status: Status.done
+          }
+        })
+      );
     } else {
-      element.status = Status.toDo;
+      this.store.dispatch(
+        new TodoActions.UpdateTodo({
+          id: element.id,
+          todo: {
+            ...element,
+            status: Status.toDo
+          }
+        })
+      );
     }
   }
 
