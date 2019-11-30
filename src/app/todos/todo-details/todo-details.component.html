@@ -1,25 +1,33 @@
-<mat-card *ngIf="todo" [ngClass]="'card center-me'">
-  <mat-card-title>{{ todo.title }}</mat-card-title>
-  <mat-card-subtitle>{{ todo.description }}</mat-card-subtitle>
-  <mat-card-content>
-    <table>
-      <tbody>
-        <tr>
-          <td>Creation Date</td>
-          <td>{{ todo.creationDate | date: 'dd/MM/yyyy' }}</td>
-        </tr>
-        <tr>
-          <td>Due Date</td>
-          <td>{{ todo.dueDate | date: 'dd/MM/yyyy' }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </mat-card-content>
+<div class="d-flex justify-content-center">
+  <mat-card *ngIf="todo" class="card">
 
-  <mat-card-actions>
-    <div class="flex-container-nowrap justify-content-between">
-      <a mat-flat-button color="primary" routerLink="/todos">Back to List</a>
-      <a mat-flat-button color="primary" routerLink="/todo/edit/{{todo.id}}">Edit</a>
-    </div>
-  </mat-card-actions>
-</mat-card>
+    <mat-card-title>{{ todo.title }}</mat-card-title>
+    <mat-card-subtitle>{{ todo.description }}</mat-card-subtitle>
+    <mat-card-content>
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td class="text-right">Creation Date</td>
+            <td>{{ todo.creationDate | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+          <tr>
+            <td class="text-right">Due Date</td>
+            <td>{{ todo.dueDate | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <div class="d-flex justify-content-between">
+        <a mat-icon-button color="primary" routerLink="/todos">
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+        <a mat-icon-button color="primary" routerLink="/todo/edit/{{todo.id}}">
+          <mat-icon>edit</mat-icon>
+        </a>
+      </div>
+    </mat-card-actions>
+
+  </mat-card>
+</div>

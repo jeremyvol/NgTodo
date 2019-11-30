@@ -1,52 +1,52 @@
 // Deprecated service since data management is done through Ngrx Store
 
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Todo } from '../shared/todo';
+// import { Injectable } from '@angular/core';
+// import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { Observable, of } from 'rxjs';
+// import { catchError } from 'rxjs/operators';
+// import { Todo } from '../shared/todo.interface';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+// const httpOptions = {
+//   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+// };
 
-@Injectable({
-  providedIn: 'root'
-})
-export class TodosService {
-  constructor(private http: HttpClient) {}
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class TodosService {
+//   constructor(private http: HttpClient) {}
 
-  private todosUrl = 'api/todos'; // URL to web api
+//   private todosUrl = 'api/todos'; // URL to web api
 
-  getAll(): Observable<Todo[]> {
-    return this.http
-      .get<Todo[]>(this.todosUrl)
-      .pipe(catchError(this.handleError('getAll', [])));
-  }
+//   getAll(): Observable<Todo[]> {
+//     return this.http
+//       .get<Todo[]>(this.todosUrl)
+//       .pipe(catchError(this.handleError('getAll', [])));
+//   }
 
-  getOne(id: number): Observable<Todo> {
-    const url = `${this.todosUrl}/${id}`;
-    return this.http
-      .get<Todo>(url)
-      .pipe(catchError(this.handleError<Todo>(`getOne id=${id}`)));
-  }
+//   getOne(id: number): Observable<Todo> {
+//     const url = `${this.todosUrl}/${id}`;
+//     return this.http
+//       .get<Todo>(url)
+//       .pipe(catchError(this.handleError<Todo>(`getOne id=${id}`)));
+//   }
 
-  update(todo: Todo): Observable<any> {
-    return this.http
-      .put(this.todosUrl, todo, httpOptions)
-      .pipe(catchError(this.handleError<any>('update')));
-  }
+//   update(todo: Todo): Observable<any> {
+//     return this.http
+//       .put(this.todosUrl, todo, httpOptions)
+//       .pipe(catchError(this.handleError<any>('update')));
+//   }
 
-  insert(todo: Todo): Observable<Todo> {
-    return this.http
-      .post<Todo>(this.todosUrl, todo, httpOptions)
-      .pipe(catchError(this.handleError<Todo>('insert')));
-  }
+//   insert(todo: Todo): Observable<Todo> {
+//     return this.http
+//       .post<Todo>(this.todosUrl, todo, httpOptions)
+//       .pipe(catchError(this.handleError<Todo>('insert')));
+//   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    };
-  }
-}
+//   private handleError<T>(operation = 'operation', result?: T) {
+//     return (error: any): Observable<T> => {
+//       console.error(error);
+//       return of(result as T);
+//     };
+//   }
+// }

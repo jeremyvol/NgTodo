@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { SelectionModel } from '@angular/cdk/collections';
 
-import { Todo, Status } from '../../shared/todo';
-import * as fromTodos from '../store/todo.reducer';
+import { MatTableDataSource } from '@angular/material/table';
+import { Store, select } from '@ngrx/store';
+
+import { MatSort } from '@angular/material/sort';
+
+import { Todo, Status } from '../../shared/todo.interface';
+import * as fromRoot from '../../app.reducer';
 
 @Component({
   selector: 'app-todos-list',
@@ -15,6 +14,9 @@ import * as fromTodos from '../store/todo.reducer';
   styleUrls: ['./todos-list.component.sass']
 })
 export class TodosListComponent implements OnInit {
+  dataSource: MatTableDataSource<Todo>;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   displayedColumns: string[] = [
     'select',
     'title',
@@ -24,35 +26,26 @@ export class TodosListComponent implements OnInit {
     'read',
     'edit'
   ];
-  todosState: Observable<{ todos: Todo[] }>;
-  todos: Todo[];
-  dataSource;
-  selection = new SelectionModel<Todo>(true, []);
+
   selectedRowIndex = -1;
 
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
-  constructor(private store: Store<fromTodos.AppState>) {}
+  constructor(private store: Store<fromRoot.State>) {}
 
   ngOnInit() {
-    this.todosState = this.store.select('todoList'); // initialState loaded
-    this.todosState.subscribe(data => {
-      this.todos = data.todos as Todo[];
-      this.dataSource = new MatTableDataSource(this.todos);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    });
+    this.store
+      .pipe(select((state: any) => state.todoState.todos))
+      .subscribe(data => {
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+      });
   }
 
   onCheckboxChange(element: Todo) {
     // TODO create new action and reducer for Todo Status change
     if (element.status !== Status.done) {
       element.status = Status.done;
-      this.dataSource.sort = this.sort;
     } else {
       element.status = Status.toDo;
-      this.dataSource.sort = this.sort;
     }
   }
 

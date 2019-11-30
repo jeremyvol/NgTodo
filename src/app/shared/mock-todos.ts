@@ -1,4 +1,4 @@
-import { Todo, Status } from './todo';
+import { Todo, Status } from './todo.interface';
 
 export const TODOS: Todo[] = [
   {

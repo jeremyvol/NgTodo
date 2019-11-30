@@ -1,11 +1,12 @@
 // import { createSelector } from '@ngrx/store';
-import { Todo } from '../../shared/todo';
+import { Todo } from '../../shared/todo.interface';
 import * as TodoActions from './todo.actions';
 import { TODOS } from 'src/app/shared/mock-todos';
+// import { ActionReducerMap } from '@ngrx/store';
 
-export interface AppState {
-  todosList: TodoState;
-}
+// export interface AppState {
+//   todosList: TodoState;
+// }
 
 export interface TodoState {
   todos: Todo[];

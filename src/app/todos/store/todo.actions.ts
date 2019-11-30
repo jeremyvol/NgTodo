@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Todo } from '../../shared/todo';
+import { Todo } from '../../shared/todo.interface';
 
 export enum ActionTypes {
   INIT_STATE = '[TODO] Init',

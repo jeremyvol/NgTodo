@@ -6,12 +6,11 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
-import { Todo, Status } from '../../shared/todo';
+import { Todo, Status } from '../../shared/todo.interface';
 import * as TodoActions from '../store/todo.actions';
-import * as fromTodos from '../store/todo.reducer';
+import * as fromRoot from '../../app.reducer';
 
 @Component({
   selector: 'app-todo-edit',
@@ -21,18 +20,15 @@ import * as fromTodos from '../store/todo.reducer';
 export class TodoEditComponent implements OnInit {
   todo: Todo;
   todoForm: FormGroup;
-  todosState: Observable<{ todos: Todo[] }>;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromTodos.AppState>
+    private store: Store<fromRoot.State>
   ) {}
 
   ngOnInit() {
-    this.todo = new Todo(); // object init in case of insert
-
     this.todoForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
       description: new FormControl(''),
@@ -44,15 +40,15 @@ export class TodoEditComponent implements OnInit {
     const id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
 
     if (id) {
-      this.todosState = this.store.select('todoList');
-      this.todosState.subscribe(data => {
-        const todos = data.todos as Todo[];
-        this.todo = todos.find(el => {
-          return el.id === id;
+      this.store
+        .pipe(select((state: any) => state.todoState.todos))
+        .subscribe(data => {
+          const todos = data as Todo[];
+          this.todo = todos.find(el => {
+            return el.id === id;
+          });
         });
-        this.todoForm = this.formBuilder.group(this.todo);
-        // this.todoForm.setValue(this.todo); both solution works but what should be the best practice ?
-      });
+      this.todoForm = this.formBuilder.group(this.todo);
     }
   }
 
