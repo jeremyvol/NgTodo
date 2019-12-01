@@ -1,28 +1,38 @@
-<mat-card class="card">
+<div class="d-flex justify-content-center">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <input matInput placeholder="Title" name="title" formControlName="title" required />
-      <mat-error>This field should not be empty.</mat-error>
-    </mat-form-field>
+    <mat-card class="card">
+      <mat-card-content>
+        <div class="d-flex flex-column">
+          <mat-form-field>
+            <input matInput placeholder="Title" name="title" formControlName="title" required />
+            <mat-error>This field should not be empty.</mat-error>
+          </mat-form-field>
 
-    <mat-form-field>
-      <textarea matInput placeholder="Description" name="description" formControlName="description"></textarea>
-    </mat-form-field>
+          <mat-form-field>
+            <textarea matInput placeholder="Description" name="description" formControlName="description"></textarea>
+          </mat-form-field>
 
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date" name="dueDate" formControlName="dueDate" />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date" name="dueDate" formControlName="dueDate" required />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>This field should not be empty.</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
 
+      <mat-card-actions class="m-0">
+        <div class="d-flex justify-content-between">
 
-    <mat-card-actions>
-      <div class="d-flex justify-content-between">
-        <a mat-flat-button color="warn" routerLink="/todos">Cancel</a>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!todoForm.valid">Save</button>
-      </div>
-    </mat-card-actions>
+          <a mat-icon-button color="warn" routerLink="/todos">
+            <mat-icon>arrow_back</mat-icon>
+          </a>
+          <button class="mx-0" mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Save</button>
+
+        </div>
+      </mat-card-actions>
+    </mat-card>
+
   </form>
-
-</mat-card>
+</div>

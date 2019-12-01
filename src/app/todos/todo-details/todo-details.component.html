@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
-  <mat-card *ngIf="todo" class="card">
 
+  <mat-card *ngIf="todo" class="card">
     <mat-card-title>{{ todo.title }}</mat-card-title>
     <mat-card-subtitle>{{ todo.description }}</mat-card-subtitle>
     <mat-card-content>
@@ -20,14 +20,16 @@
 
     <mat-card-actions>
       <div class="d-flex justify-content-between">
+
         <a mat-icon-button color="primary" routerLink="/todos">
           <mat-icon>arrow_back</mat-icon>
         </a>
         <a mat-icon-button color="primary" routerLink="/todo/edit/{{todo.id}}">
           <mat-icon>edit</mat-icon>
         </a>
+
       </div>
     </mat-card-actions>
-
   </mat-card>
+
 </div>

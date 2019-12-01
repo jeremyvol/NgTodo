@@ -19,24 +19,16 @@ import * as fromRoot from '../../app.reducer';
 })
 export class TodoEditComponent implements OnInit {
   todo: Todo;
-  todoForm: FormGroup;
+  form: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<fromRoot.State>
   ) {}
 
   ngOnInit() {
-    this.todoForm = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl(''),
-      status: new FormControl(Status.toDo),
-      creationDate: new FormControl(new Date()),
-      dueDate: new FormControl(new Date())
-    });
-
     const id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
 
     if (id) {
@@ -48,20 +40,28 @@ export class TodoEditComponent implements OnInit {
             return el.id === id;
           });
         });
-      this.todoForm = this.formBuilder.group(this.todo);
+      this.form = this.fb.group(this.todo);
+    } else {
+      this.form = this.fb.group({
+        title: ['', Validators.required],
+        description: [''],
+        status: [Status.toDo, Validators.required],
+        creationDate: [new Date(), Validators.required],
+        dueDate: [new Date(), Validators.required]
+      });
     }
   }
 
   onSubmit() {
-    if (this.todo.id) {
+    if (this.todo && this.todo.id) {
       this.store.dispatch(
         new TodoActions.UpdateTodo({
           id: this.todo.id,
-          todo: this.todoForm.value
+          todo: this.form.value
         })
       );
     } else {
-      this.store.dispatch(new TodoActions.AddTodo(this.todoForm.value));
+      this.store.dispatch(new TodoActions.AddTodo(this.form.value));
     }
     this.goBack();
   }

@@ -11,7 +11,6 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [TodosListComponent, TodoDetailsComponent, TodoEditComponent],
-  imports: [CommonModule, SharedModule, TodoRoutingModule],
-  providers: []
+  imports: [CommonModule, SharedModule, TodoRoutingModule]
 })
 export class TodosModule {}
